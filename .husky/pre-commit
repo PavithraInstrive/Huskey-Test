@@ -1,19 +1,24 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo "🔍 Running pre-commit coverage check using existing script..."
+echo "🔍 Running pre-commit coverage check..."
 
-# Run your existing coverage script from the test project
-if command -v powershell >/dev/null 2>&1; then
-    powershell -ExecutionPolicy Bypass -File "./sg.com.shares.visionapi.Tests/RunTestsWithCoverage.ps1" -AllTests -Quick
+# Run your coverage script
+powershell -ExecutionPolicy Bypass -File "./sg.com.shares.visionapi.Tests/RunTestsWithCoverage.ps1" -AllTests -Quick
+
+# Check the exit code from PowerShell
+exit_code=$?
+
+if [ $exit_code -ne 0 ]; then
+    echo ""
+    echo "❌ COMMIT BLOCKED - Coverage check failed!"
+    echo "   Your code coverage is below the required 80% threshold"
+    echo "   Add more unit tests before committing"
+    echo ""
+    echo "   To bypass (NOT recommended): git commit --no-verify"
+    exit 1
 else
-    echo "❌ PowerShell not found!"
-    exit 1
+    echo ""
+    echo "✅ COMMIT ALLOWED - Coverage check passed!"
+    exit 0
 fi
-
-if [ $? -ne 0 ]; then
-    echo "❌ Coverage check failed!"
-    exit 1
-fi
-
-echo "✅ Pre-commit hook completed successfully!"

@@ -120,8 +120,8 @@ if ($lineRate -lt 80) {
     Write-Host "   Required: 80%" -ForegroundColor Red
     Write-Host "   Current:  $lineRate%" -ForegroundColor Red
     Write-Host "   Please add more tests to meet the coverage requirement." -ForegroundColor Yellow
-    exit 1  # This will fail the commit
+    exit 1  # This will fail the commit - CRITICAL!
 } else {
     Write-Host "✅ Coverage threshold met: $lineRate% >= 80%" -ForegroundColor Green
-    exit 0  # Success
+    exit 0  # Success - allow commit
 }
