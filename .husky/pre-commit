@@ -1,0 +1,19 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 Running pre-commit coverage check using existing script..."
+
+# Run your existing coverage script from the test project
+if command -v powershell >/dev/null 2>&1; then
+    powershell -ExecutionPolicy Bypass -File "./sg.com.shares.visionapi.Tests/RunTestsWithCoverage.ps1" -AllTests -Quick
+else
+    echo "❌ PowerShell not found!"
+    exit 1
+fi
+
+if [ $? -ne 0 ]; then
+    echo "❌ Coverage check failed!"
+    exit 1
+fi
+
+echo "✅ Pre-commit hook completed successfully!"

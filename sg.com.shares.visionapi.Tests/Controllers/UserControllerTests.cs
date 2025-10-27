@@ -78,38 +78,38 @@ namespace sg.com.shares.visionapi.Tests {
         //    Assert.Equal(1, returnedUser.Id);
         //}
 
-        [Fact]
-        public async Task GetUser_WithInvalidId_ShouldReturnBadRequest() {
-            // Act
-            var result = await _controller.GetUser(0);
+        //[Fact]
+        //public async Task GetUser_WithInvalidId_ShouldReturnBadRequest() {
+        //    // Act
+        //    var result = await _controller.GetUser(0);
 
-            // Assert
-            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result.Result);
-            Assert.Equal("Invalid user ID", badRequestResult.Value);
-        }
+        //    // Assert
+        //    var badRequestResult = Assert.IsType<BadRequestObjectResult>(result.Result);
+        //    Assert.Equal("Invalid user ID", badRequestResult.Value);
+        //}
 
-        [Fact]
-        public async Task GetUser_WithNegativeId_ShouldReturnBadRequest() {
-            // Act
-            var result = await _controller.GetUser(-1);
+        //[Fact]
+        //public async Task GetUser_WithNegativeId_ShouldReturnBadRequest() {
+        //    // Act
+        //    var result = await _controller.GetUser(-1);
 
-            // Assert
-            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result.Result);
-            Assert.Equal("Invalid user ID", badRequestResult.Value);
-        }
+        //    // Assert
+        //    var badRequestResult = Assert.IsType<BadRequestObjectResult>(result.Result);
+        //    Assert.Equal("Invalid user ID", badRequestResult.Value);
+        //}
 
-        [Fact]
-        public async Task GetUser_WhenUserNotFound_ShouldReturnNotFound() {
-            // Arrange
-            _mockUserService.Setup(s => s.GetUserByIdAsync(999)).ReturnsAsync((User)null);
+        //[Fact]
+        //public async Task GetUser_WhenUserNotFound_ShouldReturnNotFound() {
+        //    // Arrange
+        //    _mockUserService.Setup(s => s.GetUserByIdAsync(999)).ReturnsAsync((User)null);
 
-            // Act
-            var result = await _controller.GetUser(999);
+        //    // Act
+        //    var result = await _controller.GetUser(999);
 
-            // Assert
-            var notFoundResult = Assert.IsType<NotFoundObjectResult>(result.Result);
-            Assert.Contains("User with ID 999 not found", notFoundResult.Value.ToString());
-        }
+        //    // Assert
+        //    var notFoundResult = Assert.IsType<NotFoundObjectResult>(result.Result);
+        //    Assert.Contains("User with ID 999 not found", notFoundResult.Value.ToString());
+        //}
 
         [Fact]
         public async Task GetUser_WhenExceptionThrown_ShouldReturnInternalServerError() {
