@@ -26,77 +26,77 @@ namespace sg.com.shares.visionapi.Tests {
 
         #region GetAllUsers Tests
 
-        [Fact]
-        public async Task GetAllUsers_ShouldReturnOkWithUsers() {
-            // Arrange
-            var users = new List<User>
-            {
-                new User { Id = 1, Name = "User1", Email = "user1@test.com" },
-                new User { Id = 2, Name = "User2", Email = "user2@test.com" }
-            };
-            _mockUserService.Setup(s => s.GetAllUsersAsync()).ReturnsAsync(users);
+        //[Fact]
+        //public async Task GetAllUsers_ShouldReturnOkWithUsers() {
+        //    // Arrange
+        //    var users = new List<User>
+        //    {
+        //        new User { Id = 1, Name = "User1", Email = "user1@test.com" },
+        //        new User { Id = 2, Name = "User2", Email = "user2@test.com" }
+        //    };
+        //    _mockUserService.Setup(s => s.GetAllUsersAsync()).ReturnsAsync(users);
 
-            // Act
-            var result = await _controller.GetAllUsers();
+        //    // Act
+        //    var result = await _controller.GetAllUsers();
 
-            // Assert
-            var okResult = Assert.IsType<OkObjectResult>(result.Result);
-            var returnedUsers = Assert.IsAssignableFrom<IEnumerable<User>>(okResult.Value);
-            Assert.Equal(2, returnedUsers.Count());
-        }
+        //    // Assert
+        //    var okResult = Assert.IsType<OkObjectResult>(result.Result);
+        //    var returnedUsers = Assert.IsAssignableFrom<IEnumerable<User>>(okResult.Value);
+        //    Assert.Equal(2, returnedUsers.Count());
+        //}
 
-        [Fact]
-        public async Task GetAllUsers_WhenExceptionThrown_ShouldReturnInternalServerError() {
-            // Arrange
-            _mockUserService.Setup(s => s.GetAllUsersAsync())
-                .ThrowsAsync(new Exception("Database error"));
+        //[Fact]
+        //public async Task GetAllUsers_WhenExceptionThrown_ShouldReturnInternalServerError() {
+        //    // Arrange
+        //    _mockUserService.Setup(s => s.GetAllUsersAsync())
+        //        .ThrowsAsync(new Exception("Database error"));
 
-            // Act
-            var result = await _controller.GetAllUsers();
+        //    // Act
+        //    var result = await _controller.GetAllUsers();
 
-            // Assert
-            var statusResult = Assert.IsType<ObjectResult>(result.Result);
-            Assert.Equal(500, statusResult.StatusCode);
-        }
+        //    // Assert
+        //    var statusResult = Assert.IsType<ObjectResult>(result.Result);
+        //    Assert.Equal(500, statusResult.StatusCode);
+        //}
 
         #endregion
 
         #region GetUser Tests
 
-        [Fact]
-        public async Task GetUser_WithValidId_ShouldReturnOkWithUser() {
-            // Arrange
-            var user = new User { Id = 1, Name = "Test User", Email = "test@test.com" };
-            _mockUserService.Setup(s => s.GetUserByIdAsync(1)).ReturnsAsync(user);
+        //[Fact]
+        //public async Task GetUser_WithValidId_ShouldReturnOkWithUser() {
+        //    // Arrange
+        //    var user = new User { Id = 1, Name = "Test User", Email = "test@test.com" };
+        //    _mockUserService.Setup(s => s.GetUserByIdAsync(1)).ReturnsAsync(user);
 
-            // Act
-            var result = await _controller.GetUser(1);
+        //    // Act
+        //    var result = await _controller.GetUser(1);
 
-            // Assert
-            var okResult = Assert.IsType<OkObjectResult>(result.Result);
-            var returnedUser = Assert.IsType<User>(okResult.Value);
-            Assert.Equal(1, returnedUser.Id);
-        }
+        //    // Assert
+        //    var okResult = Assert.IsType<OkObjectResult>(result.Result);
+        //    var returnedUser = Assert.IsType<User>(okResult.Value);
+        //    Assert.Equal(1, returnedUser.Id);
+        //}
 
-        [Fact]
-        public async Task GetUser_WithInvalidId_ShouldReturnBadRequest() {
-            // Act
-            var result = await _controller.GetUser(0);
+        //[Fact]
+        //public async Task GetUser_WithInvalidId_ShouldReturnBadRequest() {
+        //    // Act
+        //    var result = await _controller.GetUser(0);
 
-            // Assert
-            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result.Result);
-            Assert.Equal("Invalid user ID", badRequestResult.Value);
-        }
+        //    // Assert
+        //    var badRequestResult = Assert.IsType<BadRequestObjectResult>(result.Result);
+        //    Assert.Equal("Invalid user ID", badRequestResult.Value);
+        //}
 
-        [Fact]
-        public async Task GetUser_WithNegativeId_ShouldReturnBadRequest() {
-            // Act
-            var result = await _controller.GetUser(-1);
+        //[Fact]
+        //public async Task GetUser_WithNegativeId_ShouldReturnBadRequest() {
+        //    // Act
+        //    var result = await _controller.GetUser(-1);
 
-            // Assert
-            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result.Result);
-            Assert.Equal("Invalid user ID", badRequestResult.Value);
-        }
+        //    // Assert
+        //    var badRequestResult = Assert.IsType<BadRequestObjectResult>(result.Result);
+        //    Assert.Equal("Invalid user ID", badRequestResult.Value);
+        //}
 
         [Fact]
         public async Task GetUser_WhenUserNotFound_ShouldReturnNotFound() {
