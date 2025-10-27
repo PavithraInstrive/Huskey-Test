@@ -2,19 +2,42 @@
 . "$(dirname "$0")/_/husky.sh"
 
 echo "🔍 Running pre-commit coverage check..."
+echo "Current directory: $(pwd)"
 
-# Run your coverage script
-powershell -ExecutionPolicy Bypass -File "./sg.com.shares.visionapi.Tests/RunTestsWithCoverage.ps1" -AllTests -Quick
+# Get the full path to the solution root
+SOLUTION_ROOT=$(pwd)
+TEST_PROJECT_DIR="$SOLUTION_ROOT/sg.com.shares.visionapi.Tests"
 
-# Check the exit code from PowerShell
+echo "Test project directory: $TEST_PROJECT_DIR"
+
+# Check if test project exists
+if [ ! -d "$TEST_PROJECT_DIR" ]; then
+    echo "❌ Test project directory not found: $TEST_PROJECT_DIR"
+    exit 1
+fi
+
+# Run the batch file from the test project directory
+cd "$TEST_PROJECT_DIR"
+echo "Changed to: $(pwd)"
+
+# Run the coverage script
+./run-coverage.bat
+
+# Capture the exit code
 exit_code=$?
+
+echo "Coverage script exit code: $exit_code"
+
+# Return to solution root
+cd "$SOLUTION_ROOT"
 
 if [ $exit_code -ne 0 ]; then
     echo ""
-    echo "❌ COMMIT BLOCKED - Coverage check failed!"
-    echo "   Your code coverage is below the required 80% threshold"
-    echo "   Add more unit tests before committing"
+    echo "❌ COMMIT BLOCKED - Coverage is below 80%!"
+    echo "   Current coverage: 65.24%"
+    echo "   Required coverage: 80%"
     echo ""
+    echo "   Add more unit tests before committing"
     echo "   To bypass (NOT recommended): git commit --no-verify"
     exit 1
 else

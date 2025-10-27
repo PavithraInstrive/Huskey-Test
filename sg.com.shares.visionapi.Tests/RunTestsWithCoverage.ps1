@@ -8,6 +8,20 @@ param(
     [switch]$Quick = $false     # Quick mode: skip report generation
 )
 
+# Remove old TestResults directory
+if (Test-Path ".\TestResults") {
+    Remove-Item ".\TestResults" -Recurse -Force -ErrorAction SilentlyContinue
+    Write-Host "Removed old TestResults directory" -ForegroundColor Gray
+}
+
+# Also clean coverage-report if it exists
+if (Test-Path ".\coverage-report") {
+    Remove-Item ".\coverage-report" -Recurse -Force -ErrorAction SilentlyContinue
+    Write-Host "Removed old coverage-report directory" -ForegroundColor Gray
+}
+ 
+Write-Host "Cleanup completed - will generate fresh coverage data" -ForegroundColor Green
+
 # Navigate to your test project folder if needed
 # cd "D:\Shares.Visionapi\sg.com.shares.visionapi.Tests"
 
@@ -46,9 +60,25 @@ Write-Host "`Tests PASSED!" -ForegroundColor Green
 
 # Find the generated coverage file (cobertura format) recursively
 Write-Host "`nSearching for coverage file..." -ForegroundColor Cyan
-$coverageFile = Get-ChildItem -Path .\TestResults -Recurse -Filter "coverage.cobertura.xml" | 
-                Sort-Object LastWriteTime -Descending | 
-                Select-Object -First 1
+$searchPaths = @(".\TestResults", "..\TestResults", "..\..\TestResults")
+$coverageFile = $null
+
+
+foreach ($path in $searchPaths) {
+    if (Test-Path $path) {
+        Write-Host "Searching in: $path" -ForegroundColor Gray
+        $coverageFile = Get-ChildItem -Path $path -Recurse -Filter "coverage.cobertura.xml" -ErrorAction SilentlyContinue | 
+                        Sort-Object LastWriteTime -Descending | 
+                        Select-Object -First 1
+        if ($coverageFile) {
+            break
+        }
+    }
+}
+#$coverageFile = Get-ChildItem -Path .\TestResults -Recurse -Filter "coverage.cobertura.xml" | 
+#                Sort-Object LastWriteTime -Descending | 
+#                Select-Object -First 1
+
 
 if ($coverageFile -eq $null) {
     Write-Host "Coverage file not found!" -ForegroundColor Red
