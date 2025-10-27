@@ -1,0 +1,6 @@
+@sg.com.shares.visionapi_HostAddress = http://localhost:5068
+
+GET {{sg.com.shares.visionapi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

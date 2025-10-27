@@ -1,0 +1,24 @@
+﻿#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 Running pre-commit checks..."
+
+# Check if PowerShell is available
+if command -v pwsh >/dev/null 2>&1; then
+    echo "Using PowerShell Core (pwsh)"
+    pwsh -ExecutionPolicy Bypass -File "./coverage-check.ps1"
+elif command -v powershell >/dev/null 2>&1; then
+    echo "Using Windows PowerShell"
+    powershell -ExecutionPolicy Bypass -File "./coverage-check.ps1"
+else
+    echo "❌ PowerShell not found! Please install PowerShell Core or run on Windows."
+    exit 1
+fi
+
+# Check the exit code from PowerShell script
+if [ $? -ne 0 ]; then
+    echo "❌ Pre-commit hook failed!"
+    exit 1
+fi
+
+echo "✅ All pre-commit checks passed!"
