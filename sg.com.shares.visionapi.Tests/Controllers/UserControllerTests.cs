@@ -78,15 +78,15 @@ namespace sg.com.shares.visionapi.Tests {
         //    Assert.Equal(1, returnedUser.Id);
         //}
 
-        //[Fact]
-        //public async Task GetUser_WithInvalidId_ShouldReturnBadRequest() {
-        //    // Act
-        //    var result = await _controller.GetUser(0);
+        [Fact]
+        public async Task GetUser_WithInvalidId_ShouldReturnBadRequest() {
+            // Act
+            var result = await _controller.GetUser(0);
 
-        //    // Assert
-        //    var badRequestResult = Assert.IsType<BadRequestObjectResult>(result.Result);
-        //    Assert.Equal("Invalid user ID", badRequestResult.Value);
-        //}
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result.Result);
+            Assert.Equal("Invalid user ID", badRequestResult.Value);
+        }
 
         [Fact]
         public async Task GetUser_WithNegativeId_ShouldReturnBadRequest() {
