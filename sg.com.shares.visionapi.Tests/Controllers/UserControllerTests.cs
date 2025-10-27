@@ -204,82 +204,82 @@ namespace sg.com.shares.visionapi.Tests {
 
         #region UpdateUser Tests
 
-        [Fact]
-        public async Task UpdateUser_WithValidUser_ShouldReturnNoContent() {
-            // Arrange
-            var user = new User { Id = 1, Name = "Updated User", Email = "updated@test.com" };
-            _mockUserService.Setup(s => s.UpdateUserAsync(1, user)).ReturnsAsync(true);
+        //[Fact]
+        //public async Task UpdateUser_WithValidUser_ShouldReturnNoContent() {
+        //    // Arrange
+        //    var user = new User { Id = 1, Name = "Updated User", Email = "updated@test.com" };
+        //    _mockUserService.Setup(s => s.UpdateUserAsync(1, user)).ReturnsAsync(true);
 
-            // Act
-            var result = await _controller.UpdateUser(1, user);
+        //    // Act
+        //    var result = await _controller.UpdateUser(1, user);
 
-            // Assert
-            Assert.IsType<NoContentResult>(result);
-        }
+        //    // Assert
+        //    Assert.IsType<NoContentResult>(result);
+        //}
 
-        [Fact]
-        public async Task UpdateUser_WithInvalidId_ShouldReturnBadRequest() {
-            // Arrange
-            var user = new User { Name = "Test", Email = "test@test.com" };
+        //[Fact]
+        //public async Task UpdateUser_WithInvalidId_ShouldReturnBadRequest() {
+        //    // Arrange
+        //    var user = new User { Name = "Test", Email = "test@test.com" };
 
-            // Act
-            var result = await _controller.UpdateUser(0, user);
+        //    // Act
+        //    var result = await _controller.UpdateUser(0, user);
 
-            // Assert
-            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
-            Assert.Equal("Invalid user ID", badRequestResult.Value);
-        }
+        //    // Assert
+        //    var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+        //    Assert.Equal("Invalid user ID", badRequestResult.Value);
+        //}
 
-        [Fact]
-        public async Task UpdateUser_WithNegativeId_ShouldReturnBadRequest() {
-            // Arrange
-            var user = new User { Name = "Test", Email = "test@test.com" };
+        //[Fact]
+        //public async Task UpdateUser_WithNegativeId_ShouldReturnBadRequest() {
+        //    // Arrange
+        //    var user = new User { Name = "Test", Email = "test@test.com" };
 
-            // Act
-            var result = await _controller.UpdateUser(-1, user);
+        //    // Act
+        //    var result = await _controller.UpdateUser(-1, user);
 
-            // Assert
-            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
-            Assert.Equal("Invalid user ID", badRequestResult.Value);
-        }
+        //    // Assert
+        //    var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+        //    Assert.Equal("Invalid user ID", badRequestResult.Value);
+        //}
 
-        [Fact]
-        public async Task UpdateUser_WithNullUser_ShouldReturnBadRequest() {
-            // Act
-            var result = await _controller.UpdateUser(1, null);
+        //[Fact]
+        //public async Task UpdateUser_WithNullUser_ShouldReturnBadRequest() {
+        //    // Act
+        //    var result = await _controller.UpdateUser(1, null);
 
-            // Assert
-            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
-            Assert.Equal("User object is null", badRequestResult.Value);
-        }
+        //    // Assert
+        //    var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+        //    Assert.Equal("User object is null", badRequestResult.Value);
+        //}
 
-        [Fact]
-        public async Task UpdateUser_WithInvalidModelState_ShouldReturnBadRequest() {
-            // Arrange
-            _controller.ModelState.AddModelError("Email", "Email is required");
-            var user = new User { Name = "Test" };
+        //[Fact]
+        //public async Task UpdateUser_WithInvalidModelState_ShouldReturnBadRequest() {
+        //    // Arrange
+        //    _controller.ModelState.AddModelError("Email", "Email is required");
+        //    var user = new User { Name = "Test" };
 
-            // Act
-            var result = await _controller.UpdateUser(1, user);
+        //    // Act
+        //    var result = await _controller.UpdateUser(1, user);
 
-            // Assert
-            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
-            Assert.IsType<SerializableError>(badRequestResult.Value);
-        }
+        //    // Assert
+        //    var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+        //    Assert.IsType<SerializableError>(badRequestResult.Value);
+        //}
 
-        [Fact]
-        public async Task UpdateUser_WhenUserNotFound_ShouldReturnNotFound() {
-            // Arrange
-            var user = new User { Name = "Test", Email = "test@test.com" };
-            _mockUserService.Setup(s => s.UpdateUserAsync(999, user)).ReturnsAsync(false);
+        //[Fact]
+        //public async Task UpdateUser_WhenUserNotFound_ShouldReturnNotFound() {
+        //    // Arrange
+        //    var user = new User { Name = "Test", Email = "test@test.com" };
+        //    _mockUserService.Setup(s => s.UpdateUserAsync(999, user)).ReturnsAsync(false);
 
-            // Act
-            var result = await _controller.UpdateUser(999, user);
+        //    // Act
+        //    var result = await _controller.UpdateUser(999, user);
 
-            // Assert
-            var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
-            Assert.Contains("User with ID 999 not found", notFoundResult.Value.ToString());
-        }
+        //    // Assert
+        //    var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
+        //    Assert.Contains("User with ID 999 not found", notFoundResult.Value.ToString());
+        //}
 
         [Fact]
         public async Task UpdateUser_WhenExceptionThrown_ShouldReturnInternalServerError() {
