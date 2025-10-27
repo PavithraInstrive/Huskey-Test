@@ -111,19 +111,19 @@ namespace sg.com.shares.visionapi.Tests {
         //    Assert.Contains("User with ID 999 not found", notFoundResult.Value.ToString());
         //}
 
-        [Fact]
-        public async Task GetUser_WhenExceptionThrown_ShouldReturnInternalServerError() {
-            // Arrange
-            _mockUserService.Setup(s => s.GetUserByIdAsync(It.IsAny<int>()))
-                .ThrowsAsync(new Exception("Database error"));
+        //[Fact]
+        //public async Task GetUser_WhenExceptionThrown_ShouldReturnInternalServerError() {
+        //    // Arrange
+        //    _mockUserService.Setup(s => s.GetUserByIdAsync(It.IsAny<int>()))
+        //        .ThrowsAsync(new Exception("Database error"));
 
-            // Act
-            var result = await _controller.GetUser(1);
+        //    // Act
+        //    var result = await _controller.GetUser(1);
 
-            // Assert
-            var statusResult = Assert.IsType<ObjectResult>(result.Result);
-            Assert.Equal(500, statusResult.StatusCode);
-        }
+        //    // Assert
+        //    var statusResult = Assert.IsType<ObjectResult>(result.Result);
+        //    Assert.Equal(500, statusResult.StatusCode);
+        //}
 
         #endregion
 

@@ -214,7 +214,7 @@ var assemblies = [
     "name": "sg.com.shares.visionapi",
     "classes": [
       { "name": "Program", "rp": "sg.com.shares.visionapi_Program.html", "cl": 0, "ucl": 18, "cal": 18, "tl": 38, "cb": 0, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "sg.com.shares.visionapi.Controllers.UserController", "rp": "sg.com.shares.visionapi_UserController.html", "cl": 78, "ucl": 18, "cal": 96, "tl": 162, "cb": 22, "tb": 28, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "sg.com.shares.visionapi.Controllers.UserController", "rp": "sg.com.shares.visionapi_UserController.html", "cl": 68, "ucl": 28, "cal": 96, "tl": 162, "cb": 21, "tb": 28, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "sg.com.shares.visionapi.Models.User", "rp": "sg.com.shares.visionapi_User.html", "cl": 5, "ucl": 0, "cal": 5, "tl": 9, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "sg.com.shares.visionapi.Services.UserService", "rp": "sg.com.shares.visionapi_UserService.html", "cl": 45, "ucl": 0, "cal": 45, "tl": 66, "cb": 10, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
